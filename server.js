@@ -1,6 +1,7 @@
 require ("dotenv").config();
 
 const express = require("express");
+const path = require("path");
 const app = express();
 
 const user= require("./routes/user");
@@ -19,6 +20,7 @@ connectDB();
 app.use(express.json());
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api/user", user);
 app.use("/api/menu/staff", menu);

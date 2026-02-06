@@ -12,6 +12,7 @@ exports.addItem =catchAsync(async(req, res, next)=>{
         isVegetarian,
         isAvailable,
         preparationTime,
+        menuImage: req.file ? req.file.path : null,
         user:req.user.id,
     });
     res.status(201).json(menu);
@@ -23,6 +24,9 @@ exports.updateItem = catchAsync(async(req,res,next)=>{
     if(!item){
         return next(new AppError("item not found"),404);
     }
+    if (req.file) {
+        Menu.menuImage = req.file.path;
+    }   
     await item.save();
     res.status(200).json({
         success:"true",

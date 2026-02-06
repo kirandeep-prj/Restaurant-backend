@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 
 const MenuSchema = new mongoose.Schema(
     {
+        menuImage:{
+            type:String,
+        },
         name:{
             type:String,
             required:[true,"name is required"],
@@ -21,7 +24,8 @@ const MenuSchema = new mongoose.Schema(
         },
         isAvailable:{
             type:Boolean,
-            required:[true,"Available items is required"],        },
+            required:[true,"Available items is required"],
+        },
         isVegetarian:{
             type:Boolean,
             required:[true,"Vegetarian field is required"]

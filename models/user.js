@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema(
     email: {
         type: String,
         required: [true, "Email is required"],
+        unique:true,
         lowercase: true,
         trim: true
     },
@@ -46,7 +47,6 @@ userSchema.pre("save", async function () {
   if (!this.isModified("password")) return;
 
   this.password = await bcrypt.hash(this.password, 10);
-  this.passwordConfirm = undefined;
 });
 
 
