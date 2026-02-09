@@ -16,18 +16,23 @@ const storage = multer.diskStorage({
         cb(null, uniqueName + path.extname(file.originalname));
     }
 });
-const fileFilter = (req, file, cb)=>{
-    if(file.mimetype.startsWith("image/")){
-        cb(null,true);
-    }
-    else{
-        cb(new Error("Only images allowed"),false);
-    }
+const fileFilter = (req, file, cb) => {
+  const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+
+  if (allowedTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error("Only .jpg, .jpeg, .png images are allowed"), false);
+  }
 };
+
 const upload = multer({
-    storage,
-    limits:{fileSize: 3*1024*1024}, //3MB
-    fileFilter
+  storage,
+  limits: {
+    fileSize: 2 * 1024 * 1024, // ✅ 2MB
+  },
+  fileFilter,
 });
+
 
 module.exports=upload;
