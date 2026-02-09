@@ -14,6 +14,7 @@ const swaggerSpec = require("./config/swagger");
 const errorHandler = require("./middleware/errorHandler");
 const staffOrder = require("./routes/staff/order");
 const delivery = require("./routes/delivery/order");
+const orderCounts = require("./routes/staff/report");
 
 connectDB();
 
@@ -28,6 +29,7 @@ app.use("/api/menu", mainMenu);
 app.use("/api/order",order);
 app.use("/api/order/staff",staffOrder);
 app.use("/api/order/delivery",delivery);
+app.use("/api/staff/",orderCounts);
 
 app.get("/", (req, res) => {
   res.send("Restaurant API running (clean structure)");
